@@ -25,42 +25,36 @@
     // Given data which contains playerList dictionary,
     // redraw the playerListDisplay
     // playerListDict = {player1_id : score, player2_id : score}
-    function reDrawPlayerList(playerListDict) {
+    function reDrawPlayerList(playerListData) {
       clearPlayerList();
+      drawPlayerList(playerListData);
+    }
 
-      for (playerID in playerListDict) {
-        // create a list item node and assign id of the node
-        // to be playerID
-        let node = document.createElement("li");
-        node.id = playerID;
+    function drawPlayerList(playerListData) {
+      for (sid in playerListData) {
+        // extract playerID and playerScore
+        let playerID = sid.slice(0, 4); //sid is too long, we take the first 4 characters
+        let playerScore = playerListData[sid];
 
-        // create a text node and append the text node to
-        // the list item node created above
-        let playerIDText;
-        let playerList = document.getElementById("playerListDisplay");
+        // get the place we want to put the textToDislay
+        let playerListDisplay = document.getElementById("playerListDisplay");
 
-        let playerScore = playerListDict[playerID];
+        // create a list element to insert textToDisplay
+        let listElement = document.createElement("li");
+
+        // craft the text to display
+        let textToDisplay;
 
         // it is you!
-        if (socket.id == playerID) {
-          playerIDText = document.createTextNode(
-            playerID.slice(0, 4) + " 👨🏻‍💻|👩‍💻 " + "[" + playerScore + "]"
-          );
-          node.appendChild(playerIDText);
-
-          // we want to show you at top of the list
-          playerList.insertBefore(node, playerList.childNodes[0]);
-        }
-
-        // it is NOT you
-        if (socket.id !== playerID) {
-          playerIDText = document.createTextNode(
-            playerID.slice(0, 4) + " " + "[" + playerScore + "]"
-          );
-          node.appendChild(playerIDText);
-
-          // we just append it
-          playerList.append(node);
+        if (socket.id == sid) {
+          textToDisplay = playerID + " 🤪 " + "[" + playerScore + "]";
+          listElement.appendChild(document.createTextNode(textToDisplay)); // insert text to display into list element
+          playerListDisplay.prepend(listElement); // insert at top of the list
+        } else {
+          // it is not you!
+          textToDisplay = playerID + "[" + playerScore + "]";
+          listElement.appendChild(document.createTextNode(textToDisplay)); // insert text to display into list element
+          playerListDisplay.append(listElement); // insert anywhere
         }
       }
     }
