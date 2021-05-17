@@ -22,12 +22,8 @@
 
   <!-- start of helper functions -->
   <script>
-    // Given data which contains playerList dictionary,
-    // redraw the playerListDisplay
-    // playerListDict = {player1_id : score, player2_id : score}
-    function reDrawPlayerList(playerListData) {
-      clearPlayerList();
-      drawPlayerList(playerListData);
+    function clearPlayerList() {
+      document.getElementById("playerListDisplay").textContent = "";
     }
 
     function drawPlayerList(playerListData) {
@@ -59,12 +55,9 @@
       }
     }
 
-    function clearPlayerList() {
-      document.getElementById("playerListDisplay").textContent = "";
-    }
-
-    function handleButtonClick() {
-      socket.emit("button_pressed");
+    function reDrawPlayerList(playerListData) {
+      clearPlayerList();
+      drawPlayerList(playerListData);
     }
 
     // given randomTop and randomLeft values,
@@ -107,6 +100,10 @@
       moveButtonToLocation(data.randomTop, data.randomLeft);
       reDrawPlayerList(data.playerList);
     });
+
+    function handleButtonClick() {
+      socket.emit("button_pressed");
+    }
   </script>
   <!-- end of socket logic -->
 
