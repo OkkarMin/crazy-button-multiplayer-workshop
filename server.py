@@ -19,17 +19,7 @@ playerList = {}
 # start of event handlers
 @sio.event
 async def connect(sid, _):
-    playerList[sid] = {}
-    pass
-
-
-@sio.event
-async def new_player(sid, name):
-    # name + first 4 character of sid
-    name_sid = name + '--' + sid[0:2]
-
-    # add player to playerList initial score is 0
-    playerList[sid] = {'score': 0, 'name_sid': name_sid}
+    playerList[sid] = 0
 
     await sio.emit('player_connected', {'playerList': playerList})
 
@@ -49,7 +39,7 @@ async def button_pressed(sid):
     randomLeft = uniform(0, 1)
 
     # increase player score count
-    playerList[sid]['score'] += 1
+    playerList[sid] += 1
 
     await sio.emit(
         'new_button_location', {
