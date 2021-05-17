@@ -1,0 +1,4 @@
+# ignore virtualenv folder
+venv
+
+index.html.bak

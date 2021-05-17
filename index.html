@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Crazy Button Workshop</title>
+  </head>
+
+  <!-- loads styling library -->
+  <link
+    href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css"
+    rel="stylesheet"
+    type="text/css"
+  />
+
+  <!-- loads socket.io javascript library -->
+  <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"
+    integrity="sha512-q/dWJ3kcmjBLU4Qc47E4A9kTB4m3wuTY7vkFJDTZKjTs8jhyGQnaUrxa0Ytd0ssMZhbNua9hE+E7Qv1j+DyZwA=="
+    crossorigin="anonymous"
+  ></script>
+
+  <!-- start of helper functions -->
+  <script>
+    // Given data which contains playerList dictionary,
+    // redraw the playerListDisplay
+    // playerListDist = {player1_id : score, player2_id : score}
+    function reDrawPlayerList(playerListDict) {
+      // Clear current playetListDisplay
+      let playerList = document.getElementById("playerListDisplay");
+      playerList.textContent = "";
+
+      for (playerID in playerListDict) {
+        // create a list item node and assign id of the node
+        // to be playerID
+        let node = document.createElement("li");
+        node.id = playerID;
+
+        // create a text node and append the text node to
+        // the list item node created above
+        let playerIDText;
+        let playerList = document.getElementById("playerListDisplay");
+
+        let playerScore = playerListDict[playerID];
+
+        // it is you!
+        if (socket.id == playerID) {
+          playerIDText = document.createTextNode(
+            playerID.slice(0, 4) + " 👨🏻‍💻|👩‍💻 " + "[" + playerScore + "]"
+          );
+          node.appendChild(playerIDText);
+
+          // we want to show you at top of the list
+          playerList.insertBefore(node, playerList.childNodes[0]);
+        }
+
+        // it is NOT you
+        if (socket.id !== playerID) {
+          playerIDText = document.createTextNode(
+            playerID.slice(0, 4) + " " + "[" + playerScore + "]"
+          );
+          node.appendChild(playerIDText);
+
+          // we just append it
+          playerList.append(node);
+        }
+      }
+    }
+
+    function handleButtonClick() {
+      socket.emit("button_pressed");
+    }
+
+    // given randomTop and randomLeft values,
+    // move button to new location using random values
+    function moveButtonToLocation(randomTop, randomLeft) {
+      // to adapt button position to screen size;
+      let maxHeight = window.innerHeight;
+      let maxWidth = window.innerWidth;
+
+      // x and y offset of button relative to the browser
+      // screen size
+      let top_offset = maxHeight * randomTop;
+      let left_offset = maxWidth * randomLeft;
+
+      // set new button location
+      let button = document.getElementById("button");
+      button.style.top = top_offset + "px";
+      button.style.left = left_offset + "px";
+    }
+  </script>
+
+  <!-- end of helper functions -->
+
+  <!-- start of socket logic -->
+  <script>
+    const socket = io.connect("http://15.165.115.174:8080");
+
+    // new player connected
+    socket.on("player_connected", (data) => {
+      reDrawPlayerList(data.playerList);
+    });
+
+    // current player disconnected
+    socket.on("player_disconnected", (data) => {
+      reDrawPlayerList(data.playerList);
+    });
+
+    // button was pressed and server emits new_button_location event
+    socket.on("new_button_location", (data) => {
+      moveButtonToLocation(data.randomTop, data.randomLeft);
+      reDrawPlayerList(data.playerList);
+    });
+  </script>
+  <!-- end of socket logic -->
+
+  <body>
+    <div class="container">
+      <button
+        id="button"
+        class="
+          absolute
+          flex-auto
+          bg-red-500
+          hover:bg-red-400
+          text-white
+          font-bold
+          py-2
+          px-4
+          border-b-4 border-red-700
+          hover:border-red-500
+          rounded
+        "
+        onclick="handleButtonClick()"
+      >
+        Catch Me! 🤡
+      </button>
+
+      <p>Connected players 🔗</p>
+      <ul id="playerListDisplay" class="flex-auto"></ul>
+    </div>
+  </body>
+</html>
