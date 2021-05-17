@@ -24,11 +24,9 @@
   <script>
     // Given data which contains playerList dictionary,
     // redraw the playerListDisplay
-    // playerListDist = {player1_id : score, player2_id : score}
+    // playerListDict = {player1_id : score, player2_id : score}
     function reDrawPlayerList(playerListDict) {
-      // Clear current playetListDisplay
-      let playerList = document.getElementById("playerListDisplay");
-      playerList.textContent = "";
+      clearPlayerList();
 
       for (playerID in playerListDict) {
         // create a list item node and assign id of the node
@@ -65,6 +63,10 @@
           playerList.append(node);
         }
       }
+    }
+
+    function clearPlayerList() {
+      document.getElementById("playerListDisplay").textContent = "";
     }
 
     function handleButtonClick() {
