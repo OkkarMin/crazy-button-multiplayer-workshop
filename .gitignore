@@ -2,3 +2,6 @@
 venv
 
 index.html.bak
+
+admin.html
+server_admin.py

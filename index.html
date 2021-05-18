@@ -69,6 +69,15 @@
 
       // x and y offset of button relative to the browser
       // screen size
+      // randomTop and randomLeft are value between [0, 1] sent from server
+
+      // e.g for laptop with 1200 x 800 resolution and 0.5 for randomTop and randomLeft
+      // top_offset = 800 * 0.5 = 400
+      // left_offset = 1200 * 0.5 = 600
+
+      // e.g for mobile with 400 x 800 resolution and 0.5 for randomTop and randomLeft
+      // top_offset = 400 * 0.5 = 400
+      // left_offset = 800 * 0.5 = 600
       let top_offset = maxHeight * randomTop;
       let left_offset = maxWidth * randomLeft;
 
