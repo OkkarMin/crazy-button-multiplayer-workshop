@@ -2,7 +2,7 @@
 
 Curated with ❤️ by [Okkar Min](https://okkarm.in), [Ying Sheng](https://yeowys.com) and [Jiayin](https://github.com/lhinjy)
 
-## End product
+## What we will be building
 
 ![GIF of end product](/static/end_product.gif)
 
