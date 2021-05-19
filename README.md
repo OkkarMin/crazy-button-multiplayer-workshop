@@ -361,6 +361,8 @@ if __name__ == '__main__':
 
 # Serving index.html and starting WebSocket server
 
+> put `index.html` and `server.py` in same folder
+
 ## Library/Dependencies
 
 1. [Python 3.6 and above](https://www.python.org/)
@@ -374,13 +376,13 @@ pip install python-socketio #see https://python-socketio.readthedocs.io/en/lates
 3. [aiohttp](https://docs.aiohttp.org/en/stable/)
 
 ```bash
-pip install aiohttp[speedups] #see https://docs.aiohttp.org/en/stable/
+pip install aiohttp #see https://docs.aiohttp.org/en/stable/
 ```
 
 ## Running server
 
 ```bash
-cd [to-directory-where-index.html-in]
+cd [to-directory-where-index.html-is-in]
 python server.py
 # or
 python3 server.py
@@ -389,7 +391,7 @@ python3 server.py
 ## Serving index.html
 
 ```bash
-cd [to-directory-where-index.html-in]
+cd [to-directory-where-server.py-is-in]
 python3 -m http.server 80
 ```
 
