@@ -21,6 +21,9 @@ playerList = {}
 # a player has joined
 @sio.event
 async def connect(sid, _):
+    # print when new player has connected
+    print('new player : ', sid)
+
     # add player to playerList with initial score of 0
     playerList[sid] = 0
 
