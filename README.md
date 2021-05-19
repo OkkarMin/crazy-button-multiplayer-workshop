@@ -1,5 +1,7 @@
 # Crazy Buton workshop for SCSE Freshman 2021
 
+Curated with ❤️ by [Okkar Min](https://github.com/OkkarMin), [Ying Sheng](https://github.com/dannyyys) and [Jiayin](https://github.com/lhinjy)
+
 ## End product
 
 ![GIF of end product]()
