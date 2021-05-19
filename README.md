@@ -1,6 +1,6 @@
 # Crazy Buton workshop for SCSE Freshman 2021
 
-Curated with ❤️ by [Okkar Min](https://github.com/OkkarMin), [Ying Sheng](https://github.com/dannyyys) and [Jiayin](https://github.com/lhinjy)
+Curated with ❤️ by [Okkar Min](https://okkarm.in), [Ying Sheng](https://yeowys.com) and [Jiayin](https://github.com/lhinjy)
 
 ## End product
 
@@ -62,6 +62,8 @@ You visit Facebook
 2. Facebook (server) respond to your laptop with handshake confirmation
 3. Your laptop (client) and Facebook (server) WebSocket connection established
 4. You get a notification when somebody message you, new post etc...
+
+[Image taken from StackOverflow](https://stackoverflow.com/questions/14703627/websockets-protocol-vs-http)
 
 # Our Crazy Button architecture
 
