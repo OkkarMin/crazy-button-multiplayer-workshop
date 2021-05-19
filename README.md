@@ -21,7 +21,7 @@ You will understand
 - How to build and manipulate a webpage using HTML + CSS + JavaScript
 - How to build Python websocket server
 
-# Client Server Architecture
+# What is Client Server Architecture?
 
 ![Client Server Model image taken from StackOverflow](https://i.stack.imgur.com/qUyFW.png)
 
@@ -43,7 +43,7 @@ You visit YouTube
 
 [Image taken from StackOverflow](https://stackoverflow.com/questions/14703627/websockets-protocol-vs-http)
 
-# WebSocket
+# What is WebSocket?
 
 ![WebSocket Model image taken from StackOverflow](https://i.stack.imgur.com/ReJux.png)
 
@@ -91,7 +91,7 @@ You visit Facebook
 
 ![Player disconnected](/static/player_disconnected.png)
 
-# Building button page
+# Building our Crazy Button page
 
 Button page requirements
 
@@ -255,7 +255,7 @@ Button page requirements
 </html>
 ```
 
-# Building WebSocket server
+# Building our WebSocket server
 
 WebSocket server requirements
 
