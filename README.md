@@ -75,7 +75,7 @@ You visit Facebook
 
 # Building button page
 
-Button page requirements:
+Button page requirements
 
 1. A Button for players to click
 
@@ -86,7 +86,10 @@ Button page requirements:
    - current player should be at the top of the list
    - should show player score
 
+## index.html
+
 ```html
+<!-- index.html -->
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -232,4 +235,132 @@ Button page requirements:
     </div>
   </body>
 </html>
+```
+
+# Building WebSocket server
+
+WebSocket server requirements
+
+1. Should emit `player_connected` event when a new player connect to the server
+
+   - should sent the following data to client
+     - current connected `playerList`
+
+2. Should emit `player_disconnected` event when a player disconnect from the server (player close tab|browser)
+
+   - should sent the following data to client
+     - current connected `playerList`
+
+3. Should emit `new_button_locaton` event when a player has clicked the button
+
+   - should keep track of which player clicked the button, so that we can show the score
+   - should calculate random values for the button to move
+   - should sent the following data to client
+
+     - randomTop, randomLeft a number between 0 to 1 [0, 1]
+     - current connected `playerList`
+
+4. Current connected `playerList` should contain
+   - playerID and
+   - playerScore
+
+## server.py
+
+```python server.py
+### server.py ###
+# import libraries that will help us with creating the server
+import socketio
+from aiohttp import web
+from random import uniform
+
+# create a Socket.IO server
+sio = socketio.AsyncServer(cors_allowed_origins='*')
+app = web.Application()
+sio.attach(app)
+
+# keep track of list of connected players
+# {  player1_id: score,
+#    player2_id: score,
+#    player3_id: score,
+#    ...
+# }
+playerList = {}
+
+
+# start of event handlers
+# a player has joined
+@sio.event
+async def connect(sid, _):
+    # print when new player has connected
+    print('new player : ', sid)
+
+    # add player to playerList with initial score of 0
+    playerList[sid] = 0
+
+    # announce to everybody connected that a new player has connected
+    # with payload of playerList
+    await sio.emit('player_connected', {'playerList': playerList})
+
+
+# a player has left
+@sio.event
+async def disconnect(sid):
+    # remove player from playerList
+    playerList.pop(sid)
+
+    # announce to everybody connected that a player has disconnected
+    # with payload of playerList
+    await sio.emit('player_disconnected', {'playerList': playerList})
+
+
+# a player has pressed the button
+@sio.event
+async def button_pressed(sid):
+    # randomTop and randonLeft is value between [0, 1]
+    randomTop = uniform(0, 1)
+    randomLeft = uniform(0, 1)
+
+    # increase player score by 1
+    playerList[sid] += 1
+
+    # announce to everybody connected that a player has pressed the button
+    # with payload of randomTop, randomLeft to move button on all players screen
+    # and playerList to update the score on the player screen
+    await sio.emit(
+        'new_button_location', {
+            'randomTop': randomTop,
+            'randomLeft': randomLeft,
+            'playerList': playerList,
+        })
+
+
+# end of event handlers
+
+# start server
+if __name__ == '__main__':
+    web.run_app(app)
+```
+
+# Starting WebSocket server
+
+## Library/Dependencies
+
+1. [python-socketio](https://python-socketio.readthedocs.io/en/latest/server.html)
+
+```bash
+pip install python-socketio #see https://python-socketio.readthedocs.io/en/latest/server.html
+```
+
+2. [aiohttp](https://docs.aiohttp.org/en/stable/)
+
+```bash
+pip install aiohttp[speedups] #see https://docs.aiohttp.org/en/stable/
+```
+
+## Running server
+
+```bash
+python server.py
+# or
+python3 server.py
 ```
