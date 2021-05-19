@@ -75,4 +75,13 @@ You visit Facebook
 
 # Building button page
 
-- TODO: Write about building button page
+Button page requirements:
+
+1. A Button for players to click
+
+   - Button should move randomly on every player screen when one player has clicked
+
+2. Leaderboard that show list of connected players
+
+   - current player should be at the top of the list
+   - should show player score
