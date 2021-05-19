@@ -52,6 +52,8 @@ You visit YouTube
 3. Client - Server socket connection established (Client ↔️ Server)
 4. Connect is established till Client or Server close the connection
 
+> Handshake : just like the name suggests, handshake occurs when two entities are connected. In our case client and server are connected
+
 **Server push data to Client, without Client asking for it**
 
 ## Daily Example:
