@@ -4,7 +4,7 @@ Curated with ❤️ by [Okkar Min](https://github.com/OkkarMin), [Ying Sheng](ht
 
 ## End product
 
-![GIF of end product]()
+![GIF of end product](/static/end_product.gif)
 
 We are going to build a platform
 
