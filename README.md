@@ -8,7 +8,7 @@ Curated with ❤️ by [Okkar Min](https://okkarm.in), [Ying Sheng](https://yeow
 
 We are going to build a platform
 
-- Has a button
+- That has a button
 - That button moves to a random location when another player press the button on their side
 - Keep count of the the players score
 
