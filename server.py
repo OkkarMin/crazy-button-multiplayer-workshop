@@ -66,6 +66,6 @@ async def button_pressed(sid):
 
 # end of event handlers
 
-# start server
+# start websocket server to react to events
 if __name__ == '__main__':
     web.run_app(app)
