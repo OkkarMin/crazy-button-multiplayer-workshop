@@ -1,4 +1,4 @@
-# Crazy Buton workshop for SCSE Freshman 2021
+# Crazy Button workshop for SCSE Freshman 2021
 
 Curated with ❤️ by [Okkar Min](https://okkarm.in), [Ying Sheng](https://yeowys.com) and [Jiayin](https://github.com/lhinjy)
 
