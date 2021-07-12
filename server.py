@@ -9,9 +9,9 @@ app = web.Application()
 sio.attach(app)
 
 # keep track of list of connected players
-# {  player1_id: score,
-#    player2_id: score,
-#    player3_id: score,
+# {  player1_sid: score,
+#    player2_sid: score,
+#    player3_sid: score,
 #    ...
 # }
 playerList = {}
